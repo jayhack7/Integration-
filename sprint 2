@@ -1,6 +1,6 @@
-# Josil Petit-Frere Integration project check 1
+# Josil Petit-Frere Integration project
 # this program is a simple mortgage cost program that aks for user salary, house price and esitmates loan
-# if user debt/income is 45%, higher than industry recommendations, the program will reject loan application
+# if user debt/income is 43%, higher than industry recommendations, the program will reject loan application
 
 # Debt to Income (DTI) ratio
 # https://www.investopedia.com/terms/d/dti.asp
