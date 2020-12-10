@@ -1,10 +1,8 @@
-"""My Integration Project"""
+"""My Integration Project
 
 __author__ = "Josil Petit-Frere"
 
-
-# Josil Petit-Frere Integration project
-# this program is a simple mortgage cost program that aks for user salary, house price and estimates loan
+this program is a simple mortgage cost program that aks for user salary, house price and estimates loan
 # if user debt/income is 43%, higher than industry recommendations, the program will reject loan application
 
 # Debt to Income (DTI) ratio
@@ -12,10 +10,7 @@ __author__ = "Josil Petit-Frere"
 
 # Python If Not conditional examples
 # https://pythonexamples.org/python-if-not/
-# Welcome message
-
-# .isAlpha() method to check if user input only contains https://www.w3schools.com/python/ref_string_isalpha.asp
-# https://stackoverflow.com/questions/53173087/input-in-python-to-be-only-in-string
+"""
 
 
 def main():
@@ -28,8 +23,7 @@ def main():
     print("Hello, welcome to Astro Mortgage, the world's #1 mortgage lender!")
 
     # USER PROMPT - ask for first name
-    user_name = input("Please enter your first name to begin this application: "
-                      )
+    user_name = input("Please enter your first name to begin this application: ")
 
     # pass userInput to CheckString function,
     # tests if string is empty AND only contains alphabet a-z letters
@@ -240,6 +234,9 @@ def checkString(test_string):
     """
     # user_name = check if string is NOT empty
     # isalpha() = only contains  alphabet letters (a-z)
+
+    # .isAlpha() method to check if user input only contains https://www.w3schools.com/python/ref_string_isalpha.asp
+    # https://stackoverflow.com/questions/53173087/input-in-python-to-be-only-in-strin
 
     # if len(user_name) != "" and user_name.isalpha():
     if test_string and test_string.isalpha():
