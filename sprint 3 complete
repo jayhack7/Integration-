@@ -14,12 +14,11 @@ https://pythonexamples.org/python-if-not/
 """
 
 
-def main():
+def main() :
     """no arguments. The bulk of the program is executed here."""
+    '''in this function, we will obtain User Name, Occupation'''
 
     error_message_int = "ERROR - invalid number. Please re-enter."
-
-    '''in this function, we will obtain User Name, Occupation'''
 
     print("Hello, welcome to Astro Mortgage, the world's #1 mortgage lender!")
 
@@ -35,11 +34,11 @@ def main():
             # break loop
             got_good_input_string == True
             break
-        else:
+        else :
             # prompt user to re-enter string. Keep user in loop
             user_name = input("Try again. Enter your first name: ")
 
-    #print("Hello, " + user_name + "!")
+    # print("Hello, " + user_name + "!")
 
     # USER PROMPT - ask user for their occupation. Again, check input against check_string()
     user_occupation = input("What is your occupation? Please enter: ")
@@ -51,23 +50,23 @@ def main():
             # break loop
             got_good_input_string == True
             break
-        else:
+        else :
             # prompt user to re-enter string. Keep user in loop
             user_occupation = input("Try again. Enter your job title: ")
 
     # + string concatenation to group Strings and Variables together on same line.
 
-    print("Hello, "+ user_name, "the", user_occupation + "!")
+    print("Hello, " + user_name, "the", user_occupation + "!")
 
     # USER PROMPT - ask for salary
     # logic from https://sites.google.com/site/profvanselow/programming/languages/python/loops?authuser=0
     got_good_input_int = False
     while not got_good_input_int :
-        try:
+        try :
             user_salary = int(input("Please enter your annual salary (in whole dollars): "))
             got_good_input_int = True
             break
-        except ValueError:
+        except ValueError :
             print(error_message_int)
     print("You make $" + format(user_salary, "0.2f") + "?", "Nice!")
 
@@ -86,16 +85,12 @@ def main():
         try :
             user_debt_monthly = int(
                 input("Enter total amount of debt paid monthly (credit cards, student loans, etc): "))
-
             # check edge case where Monthly Debt is Greater than monthly Salary
             if user_salary_monthly <= user_debt_monthly :
                 print("ERROR - Monthly debt ($" + format(user_debt_monthly,
                                                          "0.2f") + ") is greater than monthly salary ($" + format(
                     user_salary_monthly, "0.2f") + ")")
                 print("It would be impossible to qualify for a mortgage. Are you sure that is correct?")
-
-
-
             else :
                 got_good_input_int = True
         except ValueError :
@@ -105,40 +100,40 @@ def main():
     print("Do you have any other source of income? Such as Social Security income, dividends, etc?")
     user_other_income_monthly = 0
 
-    while True:
-        try:
+    while True :
+        try :
             ask_for_other_income_1 = int(input("Press  1 for Yes, any other NUMBER for no: "))
             break
-        except:
+        except :
             print(error_message_int)
 
     # != == checks if it is NOT 1
-    if ask_for_other_income_1 != 1:
+    if ask_for_other_income_1 != 1 :
         # user said NO, move on with application
         boolean_declare_other_income = False
         print("OK, let's move on!")
-    else:
+    else :
         # user said YES,  proceed to prompt for new income
         boolean_declare_other_income = True
 
     # USER PROMPT - ask user for extra Income figures
-    if boolean_declare_other_income:
-        while True:
-            try:
+    if boolean_declare_other_income :
+        while True :
+            try :
                 user_other_income_monthly = int(
                     input("Please enter the amount of this extra income per month, in whole dollar figures: "))
                 break
-            except:
+            except :
                 print(error_message_int)
 
     # USER PROMPT -> ask for new house cost
     got_good_input_int = False
-    while not got_good_input_int:
-        try:
+    while not got_good_input_int :
+        try :
             new_house_cost = int(input("Now, please enter your new house mortgage (in whole dollar amount): "))
             got_good_input_int = True
             break
-        except ValueError:
+        except ValueError :
             print(error_message_int)
 
     # Multiply operator * - finding typical down payment by finding 20% of the mortgage
@@ -149,16 +144,17 @@ def main():
     # Logic to check if Number NOT in range in Python
     # https://stackoverflow.com/questions/36507957/checking-if-a-number-is-not-in-range-in-python
     got_good_input_int = False
-    while not got_good_input_int:
+    while not got_good_input_int :
 
-        try:
-            user_down_payment_percentage = int(input("What percent do you plan to put down as down payment? Please enter: "))
+        try :
+            user_down_payment_percentage = int(
+                input("What percent do you plan to put down as down payment? Please enter: "))
             # check if user input is less than 0 or greater than 99. impossible to put in Down payment outside of 1-99
-            if user_down_payment_percentage not in range(1, 99):
+            if user_down_payment_percentage not in range(1, 99) :
                 print("invalid number. Please choose a number between 1-99: ")
-            else:
+            else :
                 got_good_input_int = True
-        except ValueError:
+        except ValueError :
             print(error_message_int)
 
     # use DIVIDE / to convert to decimal
@@ -168,13 +164,13 @@ def main():
     print("Your downpayment of  $" + format(down_payment, "0.2f") + " will be required before close")
 
     # IN operator -
-    for x in range(2):
+    for x in range(2) :
         print('Processing your application...')
         # print END function modifies space after entire output is done
         print("NAME:", user_name, "JOB:", user_occupation, end=', ')
         # print SEP function modifies the space between outputs
         print("SALARY: $" + format(
-                    user_salary_monthly, "0.2f") + ", MORTGAGE:", new_house_cost, sep=' ')
+            user_salary_monthly, "0.2f") + ", MORTGAGE:", new_house_cost, sep=' ')
 
     # Addition operator + - we are adding User's monthly salary to their monthly other salary to get total monthly
     # cash flow
@@ -183,18 +179,15 @@ def main():
     # pass parameters to debtIncomeCalculator()
     user_debt_ratio = debt_income_calculator(user_monthly_cashflow, user_debt_monthly)
 
-
-    print(user_monthly_cashflow, "-salary... debt->", user_debt_monthly)
-    print(user_debt_ratio)
-    if user_debt_ratio <= 0.43:
-        # we will APPROVE- below 43% DTI ratio . approve
+    if user_debt_ratio <= 0.43 :
+        # we will APPROVE- below 43% DTI ratio
         print("Congratulations, " + user_name + ", you are approved!")
-        #user_debt_ratio *= 10
+        # user_debt_ratio *= 10
         print("Your debt-income ratio is " + "{0:.0%}".format(user_debt_ratio, "0.2f") + ", which is very healthy!")
         print("Enjoy your new house!")
 
     else :
-        # we will REJECT - total debt is above 43% ratio. reject
+        # we will REJECT - total debt is above 43% ratio
         print("Unfortunately " + user_name + ", we cannot approve your application at this time")
         print("We detailed the reasons why in astro_rejected.txt")
         print("Please try again later.")
@@ -203,11 +196,11 @@ def main():
         in_file = open("astro_rejected.txt", 'w')
         in_file.write("Dear " + user_name + ",")
         in_file.write("\nHere's why we decided to reject your Astro Mortgage application.")
-        #user_debt_ratio *= 10
+        # user_debt_ratio *= 10
         in_file.write("\nYour debt-income ratio is " + "{0:.0%}".format(user_debt_ratio,
-                                                             "0.2f") + " is too risky for us to underwrite your loan.")
+                                                                        "0.2f") + " is too risky for us to underwrite your loan.")
         in_file.write("\nYour monthly cashflow is $" + format(user_monthly_cashflow,
-                                                             "0.2f") + ", however, your monthly debt is $" + format(
+                                                              "0.2f") + ", however, your monthly debt is $" + format(
             user_debt_monthly, "0.2f"))
         # Subtraction - subtracting User's total monthly cashflow by monthly debts pay to find money remaining
         user_true_monthly_assets = user_monthly_cashflow - user_debt_monthly
@@ -218,18 +211,18 @@ def main():
         in_file.close()
 
 
-def debt_income_calculator(debt, cashflow):
+def debt_income_calculator(debt, cashflow) :
     """method  in two User-inputted inputs, cashflow and debt, returns the reminder
 
     Input Arguments: int, int
     Returns: int product of cashflow %2 debt
     """
 
-    calculate_debt_ratio =  cashflow / debt
+    calculate_debt_ratio = cashflow / debt
     return calculate_debt_ratio
 
 
-def check_string(test_string):
+def check_string(test_string) :
     """method returns True or False
 
     Input Arguments: checking if test_string is non-empty string consisting of only a-z alphabet letters. We will also
@@ -245,16 +238,18 @@ def check_string(test_string):
     print("")
 
     # if len(user_name) != "" and user_name.isalpha():
-    if test_string and test_string.isalpha():
+    if test_string and test_string.isalpha() :
         # both conditions are met
 
         # break loop
         return True
-    elif len(test_string) <= 0:
+    elif len(test_string) <= 0 :
         print("ERROR - you didnt type anything.")
         return False
-    else:
+    else :
         # one or both conditions are false, keep user in loop
         print("ERROR -  please use only letters. No numbers, special characters or spaces.")
         return False
+
+
 main()
