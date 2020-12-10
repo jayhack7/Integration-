@@ -25,11 +25,11 @@ def main():
     # USER PROMPT - ask for first name
     user_name = input("Please enter your first name to begin this application: ")
 
-    # pass userInput to CheckString function,
+    # pass userInput to Check_String function,
     # tests if string is empty AND only contains alphabet a-z letters
     got_good_input_string = False
     while not got_good_input_string :
-        if checkString(user_name) :
+        if check_string(user_name) :
             # both conditions are met - string NOT empty and only contains a-z letters
             # break loop
             got_good_input_string == True
@@ -38,25 +38,25 @@ def main():
             # prompt user to re-enter string. Keep user in loop
             user_name = input("Try again. Enter your first name: ")
 
-    print("Hello, " + user_name + "!")
+    #print("Hello, " + user_name + "!")
 
-    # USER PROMPT - ask user for their occupation. Again, check input against CheckString()
+    # USER PROMPT - ask user for their occupation. Again, check input against check_string()
     user_occupation = input("What is your occupation? Please enter: ")
 
     got_good_input_string = False
     while not got_good_input_string :
-        if checkString(user_name) :
+        if check_string(user_occupation) :
             # both conditions are met - string NOT empty and only contains a-z letters
             # break loop
             got_good_input_string == True
             break
         else:
             # prompt user to re-enter string. Keep user in loop
-            user_name = input("Try again. Enter your job title: ")
+            user_occupation = input("Try again. Enter your job title: ")
 
     # + string concatenation to group Strings and Variables together on same line.
 
-    print(user_name, "the", user_occupation + "!")
+    print("Hello, "+ user_name, "the", user_occupation + "!")
 
     # USER PROMPT - ask for salary
     # logic from https://sites.google.com/site/profvanselow/programming/languages/python/loops?authuser=0
@@ -89,7 +89,7 @@ def main():
             # check edge case where Monthly Debt is Greater than monthly Salary
             if user_salary_monthly <= user_debt_monthly :
                 print("ERROR - Monthly debt ($" + format(user_debt_monthly,
-                                                         "0.2f") + ") is greather than monthly salary ($" + format(
+                                                         "0.2f") + ") is greater than monthly salary ($" + format(
                     user_salary_monthly, "0.2f") + ")")
                 print("It would be impossible to qualify for a mortgage. Are you sure that is correct?")
 
@@ -99,7 +99,7 @@ def main():
             print(error_message_int)
 
     # USER PROMPT - ask user if they would like to declare any other income
-    print("Do you have any other source of income? Such as Social Security income, divinds, etc?")
+    print("Do you have any other source of income? Such as Social Security income, dividends, etc?")
     user_other_income_monthly = 0
 
     while True:
@@ -112,14 +112,14 @@ def main():
     # != == checks if it is NOT 1
     if ask_for_other_income_1 != 1:
         # user said NO, move on with application
-        declare_other_income = False
+        boolean_declare_other_income = False
         print("OK, let's move on!")
     else:
         # user said YES,  proceed to prompt for new income
-        declare_other_income = True
+        boolean_declare_other_income = True
 
     # USER PROMPT - ask user for extra Income figures
-    if declare_other_income:
+    if boolean_declare_other_income:
         while True:
             try:
                 user_other_income_monthly = int(
@@ -183,7 +183,7 @@ def main():
     print("-----------------------------------")
     if user_debt_ratio <= 43:
         # we will APPROVE- below 43% DTI ratio . approve
-        print("Congratalations, " + user_name + ", you are approved!")
+        print("Congratulations, " + user_name + ", you are approved!")
         print("Your debt-income ratio is " + format(user_debt_ratio, "0.2f") + "% is very healthy!")
         print("Enjoy your new house!")
 
@@ -203,7 +203,7 @@ def main():
         inFile.write("\nYour monthly cashflow is $" + format(user_monthly_cashflow,
                                                              "0.2f") + ", however, your monthly debt is $" + format(
             user_debt_monthly, "0.2f"))
-        # Subtraction - subtracting User's total monthly cashflow by monthly debts pay to find money remanining
+        # Subtraction - subtracting User's total monthly cashflow by monthly debts pay to find money remaining
         user_true_monthly_assets = user_monthly_cashflow - user_debt_monthly
         inFile.write(
             "\nAfter paying off mandatory debts, you are only left with $" + format(user_true_monthly_assets, "0.2f") +
@@ -224,7 +224,7 @@ def debt_income_calculator(cashflow, debt):
     return calculate_debt_ratio
 
 
-def checkString(test_string):
+def check_string(test_string):
     """method returns True or False
 
     Input Arguments: checking if test_string is non-empty string consisting of only a-z alphabet letters. We will also
@@ -237,6 +237,7 @@ def checkString(test_string):
 
     # .isAlpha() method to check if user input only contains https://www.w3schools.com/python/ref_string_isalpha.asp
     # https://stackoverflow.com/questions/53173087/input-in-python-to-be-only-in-strin
+    print("")
 
     # if len(user_name) != "" and user_name.isalpha():
     if test_string and test_string.isalpha():
@@ -244,8 +245,11 @@ def checkString(test_string):
 
         # break loop
         return True
+    elif len(test_string) <= 0:
+        print("ERROR - you didnt type anything.")
+        return False
     else:
         # one or both conditions are false, keep user in loop
-        print("ERROR -  please use only letters. No numbers or spaces.")
+        print("ERROR -  please use only letters. No numbers, special characters or spaces.")
         return False
 main()
