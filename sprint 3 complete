@@ -1,15 +1,16 @@
-"""My Integration Project
+"""My Integration Project"""
 
 __author__ = "Josil Petit-Frere"
+"""
+This program is a simple mortgage cost program that aks for user salary, debt, house price and estimates loan.
+If user debt/income ratio is 43% or higher  (industry recommendations), the program will reject loan application and
+print out some reasons why in a text file.
 
-this program is a simple mortgage cost program that aks for user salary, house price and estimates loan
-# if user debt/income is 43%, higher than industry recommendations, the program will reject loan application
+Debt to Income (DTI) ratio
+https://www.investopedia.com/terms/d/dti.asp
 
-# Debt to Income (DTI) ratio
-# https://www.investopedia.com/terms/d/dti.asp
-
-# Python If Not conditional examples
-# https://pythonexamples.org/python-if-not/
+Python If Not conditional examples
+https://pythonexamples.org/python-if-not/
 """
 
 
@@ -93,6 +94,8 @@ def main():
                     user_salary_monthly, "0.2f") + ")")
                 print("It would be impossible to qualify for a mortgage. Are you sure that is correct?")
 
+
+
             else :
                 got_good_input_int = True
         except ValueError :
@@ -139,7 +142,7 @@ def main():
             print(error_message_int)
 
     # Multiply operator * - finding typical down payment by finding 20% of the mortgage
-    print("Now we need to find your down payment. It is usually 7%. That would be about " + str(
+    print("Now we need to find your down payment. It is usually 7%. That would be about $" + str(
         new_house_cost * 0.07) + " for you.")
 
     # USER PROMPT -> ask for down payment %
@@ -149,9 +152,9 @@ def main():
     while not got_good_input_int:
 
         try:
-            user_down_payment_input = int(input("What percent do you plan to put down as down payment? Please enter: "))
+            user_down_payment_percentage = int(input("What percent do you plan to put down as down payment? Please enter: "))
             # check if user input is less than 0 or greater than 99. impossible to put in Down payment outside of 1-99
-            if user_down_payment_input not in range(1, 99):
+            if user_down_payment_percentage not in range(1, 99):
                 print("invalid number. Please choose a number between 1-99: ")
             else:
                 got_good_input_int = True
@@ -160,7 +163,7 @@ def main():
 
     # use DIVIDE / to convert to decimal
 
-    down_payment = new_house_cost * (user_down_payment_input / 100)
+    down_payment = new_house_cost * (user_down_payment_percentage / 100)
 
     print("Your downpayment of  $" + format(down_payment, "0.2f") + " will be required before close")
 
@@ -170,36 +173,39 @@ def main():
         # print END function modifies space after entire output is done
         print("NAME:", user_name, "JOB:", user_occupation, end=', ')
         # print SEP function modifies the space between outputs
-        print("SALARY: $" + user_salary_monthly, "MORTGAGE:", new_house_cost, sep=' ')
+        print("SALARY: $" + format(
+                    user_salary_monthly, "0.2f") + ", MORTGAGE:", new_house_cost, sep=' ')
 
     # Addition operator + - we are adding User's monthly salary to their monthly other salary to get total monthly
     # cash flow
     user_monthly_cashflow = user_other_income_monthly + user_salary_monthly
-    # Modulo operator % - to find the reminder o  monthly salary and monthly debt.
 
     # pass parameters to debtIncomeCalculator()
     user_debt_ratio = debt_income_calculator(user_monthly_cashflow, user_debt_monthly)
 
-    print("-----------------------------------")
-    if user_debt_ratio <= 43:
+
+    print(user_monthly_cashflow, "-salary... debt->", user_debt_monthly)
+    print(user_debt_ratio)
+    if user_debt_ratio <= 0.43:
         # we will APPROVE- below 43% DTI ratio . approve
         print("Congratulations, " + user_name + ", you are approved!")
-        print("Your debt-income ratio is " + format(user_debt_ratio, "0.2f") + "% is very healthy!")
+        #user_debt_ratio *= 10
+        print("Your debt-income ratio is " + "{0:.0%}".format(user_debt_ratio, "0.2f") + ", which is very healthy!")
         print("Enjoy your new house!")
 
     else :
-        # we will REJECT - total assets above 43% debt. reject
+        # we will REJECT - total debt is above 43% ratio. reject
         print("Unfortunately " + user_name + ", we cannot approve your application at this time")
         print("We detailed the reasons why in astro_rejected.txt")
         print("Please try again later.")
 
-        # inFile -
+        # inFile - to open text file. Use w to overwrite any previous entries.
         inFile = open("astro_rejected.txt", 'w')
         inFile.write("Dear " + user_name + ",")
         inFile.write("\nHere's why we decided to reject your Astro Mortgage application.")
-
-        inFile.write("\nYour debt-income ratio is " + format(user_debt_ratio,
-                                                             "0.2f") + "% is too risky for us to underwrite your loan.")
+        #user_debt_ratio *= 10
+        inFile.write("\nYour debt-income ratio is " + "{0:.0%}".format(user_debt_ratio,
+                                                             "0.2f") + " is too risky for us to underwrite your loan.")
         inFile.write("\nYour monthly cashflow is $" + format(user_monthly_cashflow,
                                                              "0.2f") + ", however, your monthly debt is $" + format(
             user_debt_monthly, "0.2f"))
@@ -207,20 +213,19 @@ def main():
         user_true_monthly_assets = user_monthly_cashflow - user_debt_monthly
         inFile.write(
             "\nAfter paying off mandatory debts, you are only left with $" + format(user_true_monthly_assets, "0.2f") +
-            " for all your other life expenses.")
+            " for all your other life expenses, such as food, healthcare, leisures, etc."
         inFile.write("\nAstro Mortgage would like to see a more healthy balance.")
-
         inFile.close()
 
 
-def debt_income_calculator(cashflow, debt):
+def debt_income_calculator(debt, cashflow):
     """method  in two User-inputted inputs, cashflow and debt, returns the reminder
 
     Input Arguments: int, int
-    Returns: int product of cashflow * debt
+    Returns: int product of cashflow %2 debt
     """
 
-    calculate_debt_ratio = cashflow % debt
+    calculate_debt_ratio =  cashflow / debt
     return calculate_debt_ratio
 
 
