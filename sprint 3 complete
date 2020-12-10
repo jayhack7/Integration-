@@ -199,23 +199,23 @@ def main():
         print("We detailed the reasons why in astro_rejected.txt")
         print("Please try again later.")
 
-        # inFile - to open text file. Use w to overwrite any previous entries.
-        inFile = open("astro_rejected.txt", 'w')
-        inFile.write("Dear " + user_name + ",")
-        inFile.write("\nHere's why we decided to reject your Astro Mortgage application.")
+        # write() function to open text file. Use w argument to  create new file and overwrite any previous entries.
+        in_file = open("astro_rejected.txt", 'w')
+        in_file.write("Dear " + user_name + ",")
+        in_file.write("\nHere's why we decided to reject your Astro Mortgage application.")
         #user_debt_ratio *= 10
-        inFile.write("\nYour debt-income ratio is " + "{0:.0%}".format(user_debt_ratio,
+        in_file.write("\nYour debt-income ratio is " + "{0:.0%}".format(user_debt_ratio,
                                                              "0.2f") + " is too risky for us to underwrite your loan.")
-        inFile.write("\nYour monthly cashflow is $" + format(user_monthly_cashflow,
+        in_file.write("\nYour monthly cashflow is $" + format(user_monthly_cashflow,
                                                              "0.2f") + ", however, your monthly debt is $" + format(
             user_debt_monthly, "0.2f"))
         # Subtraction - subtracting User's total monthly cashflow by monthly debts pay to find money remaining
         user_true_monthly_assets = user_monthly_cashflow - user_debt_monthly
-        inFile.write(
+        in_file.write(
             "\nAfter paying off mandatory debts, you are only left with $" + format(user_true_monthly_assets, "0.2f") +
-            " for all your other life expenses, such as food, healthcare, leisures, etc."
-        inFile.write("\nAstro Mortgage would like to see a more healthy balance.")
-        inFile.close()
+            " for all your other life expenses, such as food, healthcare, leisures, etc.")
+        in_file.write("\nAstro Mortgage would like to see a more healthy balance.")
+        in_file.close()
 
 
 def debt_income_calculator(debt, cashflow):
